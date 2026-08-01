@@ -1266,7 +1266,7 @@ Special thanks to:
 - **Ankit Mawle** – for delivering the hands-on sessions and explaining the practical implementation of Artificial Intelligence and Edge AI concepts. 
   **LinkedIn:** https://www.linkedin.com/in/ankitmawle/
   
-- **Dhanvanti Bhavsar** – for demonstrating practical deployment of low-bit quantized neural networks on the VSDSquadron RISC-V platform and sharing valuable implementation insights during the workshop. 
+- **Dhanvanti Bhavsar** – for demonstrating practical deployment of low-bit quantized neural networks on the VSDSquadron RISC-V platform and sharing valuable implementation insights during the workshop.
   **LinkedIn:** https://www.linkedin.com/in/dhanvanti-bhavsar-387620160/
   
 I also thank the entire **VLSI System Design (VSD)** team for providing a practical learning environment that combines Artificial Intelligence, Machine Learning, Embedded Systems, and RISC-V into a structured hands-on experience.

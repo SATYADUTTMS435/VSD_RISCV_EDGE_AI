@@ -97,7 +97,6 @@ Input + Rules
        ▼
     Output
 ```
-
 The programmer manually writes every rule.
 
 The computer never learns.

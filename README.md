@@ -665,6 +665,279 @@ The trained model achieved approximately **97% accuracy** on the MNIST test data
 
 ---
 
+# Memory Constraints in Edge AI
+
+Unlike desktop computers or cloud servers, embedded systems have extremely limited hardware resources.
+
+Typical constraints include:
+
+- Very limited RAM
+- Limited Flash/ROM
+- Lower clock frequency
+- Limited processing capability
+- Strict power consumption requirements
+
+For example, the VSDSquadron Pro board used in the workshop targets deployment within approximately **16 KB RAM**, requiring careful optimization of both the neural network and its memory footprint. :contentReference[oaicite:1]{index=1}
+
+This means a model that works perfectly on a laptop may not fit inside an embedded processor without optimization.
+
+---
+
+# Why Quantization?
+
+During training, Neural Networks generally use **32-bit floating-point (FP32)** numbers.
+
+Example
+
+```
+Weight = 0.84327615
+Bias   = -1.254382
+```
+
+Floating-point numbers provide high precision but consume significant memory.
+
+For embedded systems, this becomes expensive.
+
+Instead of storing
+
+```
+32 bits
+```
+
+for every weight,
+
+we can compress them into
+
+- INT8
+- INT4
+- INT2
+- Binary (1-bit)
+
+This process is called **Quantization**.
+
+---
+
+# Floating Point to Integer Conversion
+
+Training
+
+```
+FP32
+
+↓
+
+0.84327615
+```
+
+After Quantization
+
+```
+INT8
+
+↓
+
+84
+```
+
+The model stores an integer together with a scale factor so that computations approximate the original floating-point values.
+
+This dramatically reduces memory usage while maintaining acceptable accuracy for inference. :contentReference[oaicite:2]{index=2}
+
+---
+
+# Why INT8 Instead of FP32?
+
+Suppose a model contains
+
+```
+1,000,000 weights
+```
+
+FP32
+
+```
+1 weight
+
+↓
+
+32 bits
+
+↓
+
+4 Bytes
+```
+
+Memory required
+
+```
+≈ 4 MB
+```
+
+INT8
+
+```
+1 weight
+
+↓
+
+8 bits
+
+↓
+
+1 Byte
+```
+
+Memory required
+
+```
+≈ 1 MB
+```
+
+This provides roughly a **4× reduction** in model storage.
+
+Lower bit-widths such as INT4, INT2, ternary, or binary reduce memory even further, although they may reduce accuracy if not trained carefully. :contentReference[oaicite:3]{index=3}
+
+---
+
+# Pre-Training vs Post-Training Quantization
+
+## Post-Training Quantization (PTQ)
+
+Workflow
+
+```
+Train Model
+
+↓
+
+FP32 Model
+
+↓
+
+Quantize
+
+↓
+
+INT8 Model
+```
+
+Advantages
+
+- Fast
+- Simple
+- Existing models can be compressed
+
+Disadvantages
+
+- Accuracy may decrease, especially with aggressive low-bit quantization. :contentReference[oaicite:4]{index=4}
+
+---
+
+## Quantization-Aware Training (QAT)
+
+Workflow
+
+```
+Training
+
+↓
+
+Quantization simulated during training
+
+↓
+
+Model learns with low-bit weights
+
+↓
+
+Deployment
+```
+
+The model is trained while accounting for quantization effects.
+
+Advantages
+
+- Better accuracy
+- More robust for INT4, INT2, ternary, and binary weights
+- Preferred for highly memory-constrained edge devices. :contentReference[oaicite:5]{index=5}
+
+---
+
+# Memory Optimization Techniques
+
+To deploy AI models on microcontrollers, multiple optimizations are combined:
+
+- Weight Quantization
+- Activation Quantization
+- Model Compression
+- Network Pruning
+- Architecture Simplification
+- Memory Profiling
+- Layer Optimization
+
+The workshop emphasizes balancing **accuracy**, **RAM usage**, **Flash usage**, and **latency** to create deployable Edge AI applications. :contentReference[oaicite:6]{index=6}
+
+---
+
+# Python to Embedded C Workflow
+
+One of the key ideas of this workshop is that training is performed in Python, while inference runs on an embedded RISC-V processor.
+
+```
+Python
+
+↓
+
+Train Neural Network
+
+↓
+
+Quantize Model
+
+↓
+
+Export Model
+
+↓
+
+Generate C Arrays
+
+↓
+
+Compile using SiFive Freedom Studio
+
+↓
+
+Deploy on RISC-V
+
+↓
+
+Run Inference
+```
+
+The exported model contains quantized weights that are compiled directly into the embedded firmware.
+
+---
+
+# Training vs Inference
+
+Training
+
+- Requires floating-point computation
+- High memory usage
+- High computational cost
+- Performed on a PC
+
+Inference
+
+- Uses trained parameters only
+- Often uses INT8 or lower precision
+- Lower memory usage
+- Faster execution
+- Suitable for embedded RISC-V systems
+
+The workshop focuses on training models on a desktop environment and preparing them for efficient inference on memory-constrained RISC-V hardware. :contentReference[oaicite:7]{index=7}
+
 # Edge AI
 
 Traditional AI systems generally rely on cloud computing.
@@ -985,14 +1258,17 @@ I would like to express my sincere gratitude to the **VLSI System Design (VSD)**
 Special thanks to:
 
 - **Kunal Ghosh** – Co-Founder, VLSI System Design (VSD), for creating industry-oriented learning programs that bridge the gap between academic concepts and practical semiconductor workflows. His efforts in promoting open-source EDA tools, RISC-V, and semiconductor education have benefited thousands of students and professionals.  
-  **LinkedIn:** https://in.linkedin.com/in/kunal-ghosh-vlsisystemdesign-com-28084836 :contentReference[oaicite:0]{index=0}
+  **LinkedIn:** https://in.linkedin.com/in/kunal-ghosh-vlsisystemdesign-com-28084836 
 
-- **Anagha Ghosh** – for coordinating the workshop, motivating learners, and supporting the VSD learning initiatives throughout the program. :contentReference[oaicite:1]{index=1}
-
-- **Ankit Mawle** – for delivering the hands-on sessions and explaining the practical implementation of Artificial Intelligence and Edge AI concepts. :contentReference[oaicite:2]{index=2}
-
-- **Dhanvanti Bhavsar** – for demonstrating practical deployment of low-bit quantized neural networks on the VSDSquadron RISC-V platform and sharing valuable implementation insights during the workshop. :contentReference[oaicite:3]{index=3}
-
+- **Anagha Ghosh** – for coordinating the workshop, motivating learners, and supporting the VSD learning initiatives throughout the program. 
+  **LinkedIn:** https://www.linkedin.com/in/anagha-ghosh-vlsisystemdesign-com-a4394936/
+  
+- **Ankit Mawle** – for delivering the hands-on sessions and explaining the practical implementation of Artificial Intelligence and Edge AI concepts. 
+  **LinkedIn:** https://www.linkedin.com/in/ankitmawle/
+  
+- **Dhanvanti Bhavsar** – for demonstrating practical deployment of low-bit quantized neural networks on the VSDSquadron RISC-V platform and sharing valuable implementation insights during the workshop. 
+  **LinkedIn:** https://www.linkedin.com/in/dhanvanti-bhavsar-387620160/
+  
 I also thank the entire **VLSI System Design (VSD)** team for providing a practical learning environment that combines Artificial Intelligence, Machine Learning, Embedded Systems, and RISC-V into a structured hands-on experience.
 
 ---

@@ -49,9 +49,8 @@ The practical implementation was performed using Python (Google Colab) while dep
 │   ├── Startup Regression Comparison.pdf
 │   ├── Neural Network Notes.pdf
 │   └── ...
-├── notebooks/
 ├── screenshots/
-└── src/
+
 ```
 
 The **files/** directory contains exported PDFs documenting each experiment, plots, and implementation carried out during the course.
@@ -100,15 +99,6 @@ Input + Rules
 ```
 
 The programmer manually writes every rule.
-
-Example:
-
-```
-If marks > 35
-    Pass
-Else
-    Fail
-```
 
 The computer never learns.
 

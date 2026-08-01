@@ -978,23 +978,41 @@ Throughout this workshop, I developed practical knowledge in:
 
 ---
 
-# Acknowledgement
+# Acknowledgements
 
-I would like to express my sincere gratitude to the mentors and instructors at **VLSI System Design (VSD)** for designing and delivering this practical RISC-V Edge AI workshop.
+I would like to express my sincere gratitude to the **VLSI System Design (VSD)** team for designing and delivering this hands-on **RISC-V Edge AI** workshop, which provided valuable exposure to Artificial Intelligence, Embedded Systems, and the RISC-V ecosystem.
 
 Special thanks to:
 
-- **Kunal Ghosh** – Co-Founder, VLSI System Design, for creating an industry-oriented learning platform and providing practical insights into RISC-V, VLSI, and semiconductor education. :contentReference[oaicite:0]{index=0}
-- **Anagha Ghosh** – VLSI System Design, for her support in the workshop and contributions to the VSD learning initiatives. :contentReference[oaicite:1]{index=1}
-- **Ankit Mawle** – for conducting the hands-on sessions and explaining the Artificial Intelligence, Python, and Edge AI implementation workflow.
-- **Dhanvanti Bhavskar** – for guidance during the workshop and support throughout the practical implementation of the RISC-V Edge AI course.
+- **Kunal Ghosh** – Co-Founder, VLSI System Design (VSD), for creating industry-oriented learning programs that bridge the gap between academic concepts and practical semiconductor workflows. His efforts in promoting open-source EDA tools, RISC-V, and semiconductor education have benefited thousands of students and professionals.  
+  **LinkedIn:** https://in.linkedin.com/in/kunal-ghosh-vlsisystemdesign-com-28084836 :contentReference[oaicite:0]{index=0}
 
+- **Anagha Ghosh** – for coordinating the workshop, motivating learners, and supporting the VSD learning initiatives throughout the program. :contentReference[oaicite:1]{index=1}
+
+- **Ankit Mawle** – for delivering the hands-on sessions and explaining the practical implementation of Artificial Intelligence and Edge AI concepts. :contentReference[oaicite:2]{index=2}
+
+- **Dhanvanti Bhavsar** – for demonstrating practical deployment of low-bit quantized neural networks on the VSDSquadron RISC-V platform and sharing valuable implementation insights during the workshop. :contentReference[oaicite:3]{index=3}
+
+I also thank the entire **VLSI System Design (VSD)** team for providing a practical learning environment that combines Artificial Intelligence, Machine Learning, Embedded Systems, and RISC-V into a structured hands-on experience.
 
 ---
-## Note
 
-This repository documents my complete learning process throughout the workshop.
+# Future Work
 
+The primary objective of this workshop was to understand the **complete Edge AI workflow**, beginning from model development in Python and progressing towards deployment on a RISC-V embedded platform.
+
+During this project, I successfully:
+
+- Developed and trained Machine Learning models.
+- Implemented Linear Regression, Polynomial Regression, Gradient Descent, and Neural Networks.
+- Explored the complete software workflow using **SiFive Freedom Studio**, the RISC-V GCC toolchain, and QEMU.
+- Understood the process of exporting and preparing AI models for embedded inference.
+
+Due to the **unavailability of the VSDSquadron development board**, real-time deployment on physical hardware could not be completed during this workshop.
+
+However, the software development, toolchain configuration, and deployment concepts learned through this course have provided me with the knowledge required to independently deploy and validate these AI models on the VSDSquadron board or similar RISC-V hardware in the future.
+
+This repository therefore represents not only the completed software implementation but also a strong foundation for future hardware-based Edge AI development.
 While all Machine Learning experiments were successfully implemented and evaluated in Python, real-time deployment on hardware could not be completed because the **VSDSquadron development board was unavailable**. Additionally, significant time was spent resolving **SiFive Freedom Studio configuration, BSP, and toolchain setup issues**.
 
 Nevertheless, the project successfully demonstrates the complete software workflow for developing, training, evaluating, and preparing AI models for deployment on RISC-V based embedded systems.
